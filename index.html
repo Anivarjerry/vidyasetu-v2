@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, interactive-widget=resizes-content" />
+    <title>VidyaSetu AI - Premium</title>
+    <meta name="description" content="School Management System" />
+    <!-- Dynamic Theme Color for Mobile Status Bar -->
+    <meta name="theme-color" content="#F8FAFC" id="meta-theme-light" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#020617" id="meta-theme-dark" media="(prefers-color-scheme: dark)">
+    
+    <script>
+      // Blocking script to prevent theme blink
+      (function() {
+        const savedTheme = localStorage.getItem('vidyasetu_theme');
+        const theme = savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      })();
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: '#ecfdf5',
+                100: '#d1fae5',
+                500: '#10b981',
+                600: '#059669',
+                700: '#047857',
+              },
+              dark: {
+                950: '#020617',
+                900: '#0f172a',
+                800: '#1e293b',
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+            },
+            animation: {
+              'glow-soft': 'glow-soft 3s ease-in-out infinite alternate',
+              'float': 'float 10s ease-in-out infinite',
+            },
+            keyframes: {
+              'glow-soft': {
+                'from': { 'filter': 'drop-shadow(0 0 1px rgba(16, 185, 129, 0.2))' },
+                'to': { 'filter': 'drop-shadow(0 0 4px rgba(16, 185, 129, 0.4))' }
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0) scale(1)' },
+                '50%': { transform: 'translateY(-10px) scale(1.01)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --safe-top: env(safe-area-inset-top, 0px);
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            overscroll-behavior: none;
+            -webkit-tap-highlight-color: transparent;
+            /* Ensures background fills safe areas */
+            background-color: #F8FAFC;
+        }
+        html.dark body {
+            background-color: #020617;
+        }
+
+        .glass-card {
+            background: #FFFFFF;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        html.dark .glass-card {
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        html.dark .glass-header {
+            background: rgba(2, 6, 23, 0.95);
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        html.dark .glass-nav {
+            background: rgba(2, 6, 23, 0.95);
+        }
+
+        .bg-blob {
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -1;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+        html.dark .bg-blob {
+            opacity: 0.08;
+        }
+
+        .neon-glow-subtle {
+            filter: drop-shadow(0 0 3px rgba(16, 185, 129, 0.25));
+        }
+
+        .premium-modal-backdrop {
+          animation: backdrop-fade 0.45s cubic-bezier(0.32, 0.72, 0, 1) both;
+        }
+        @keyframes backdrop-fade {
+          from { opacity: 0; backdrop-filter: blur(0px); }
+          to { opacity: 1; backdrop-filter: blur(12px); }
+        }
+
+        .premium-modal-content {
+          animation: premium-pop 0.55s cubic-bezier(0.32, 0.72, 0, 1) both;
+          will-change: transform, opacity;
+          transform-origin: center center;
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+        }
+        @keyframes premium-pop {
+          0% { opacity: 0; transform: scale(0.85) translateY(60px); }
+          100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .premium-subview-enter {
+          animation: premium-slide-in 0.45s cubic-bezier(0.32, 0.72, 0, 1) both;
+          will-change: transform, opacity;
+        }
+        @keyframes premium-slide-in {
+          0% { opacity: 0; transform: scale(0.96) translateX(30px); }
+          100% { opacity: 1; transform: scale(1) translateX(0); }
+        }
+
+        .safe-padding-top { padding-top: var(--safe-top); }
+        .safe-padding-bottom { padding-bottom: var(--safe-bottom); }
+        .safe-margin-top { margin-top: var(--safe-top); }
+
+        * {
+          scrollbar-width: none;
+          -webkit-overflow-scrolling: touch;
+        }
+        *::-webkit-scrollbar { display: none; }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@^2.90.1",
+    "firebase/": "https://esm.sh/firebase@^12.7.0/",
+    "@google/genai": "https://esm.sh/@google/genai"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div class="bg-blob bg-emerald-500 top-[-150px] left-[-150px] animate-float"></div>
+    <div class="bg-blob bg-blue-500 bottom-[-150px] right-[-150px] animate-float" style="animation-delay: -5s"></div>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
